@@ -1,0 +1,33 @@
+--- # TrakMaker example
+  structure: # define the name of the input POSCAR and output xdatcar (full path or relative to input.yaml).
+    input_poscar: POSCAR
+    output_xdatcar: XDATCAR
+  evolution: # define the evolution time and interval.
+    final_time: 2 # in picoseconds
+    delta_time: 0.005
+  groups: # define groups of atoms that follow the same oscillation
+    - name: group1 # arbitrary but supercell groups should have the same name
+      indices: [3,6,8] # indices of the atoms as given in the structure file (starts in 1).
+      frequency: [0,0,1] # frequency in each direction in Thz
+      amplitude: [0,0,1] # amplitude in each direction in angstroms
+    - name: group2
+      indices: [4,7]
+      frequency: [0,0.5 ,1  ]
+      amplitude: [0,0.75,0.5]
+    - name: group3
+      indices: [1]
+      frequency: [2   ,0,0]
+      amplitude: [0.25,0,0]
+  supercell: # define supercell dimensions and respective parameters
+    dimensions: [1,2,2] # extensions in a,b and c direction.
+    parameters:
+        - supercell_index: [1,2,1] # refers to a particular unit cell from the supercell
+          groups: # groups should match the names originally defined.
+            - name: group2 # Missing groups will follow the dynamics of the original unit cell.
+              phase: [0,0,0.5] # Apply a phase to this group in this supercell (values between 0 and 1).
+              scale: [1,1,1] # Apply a scaling factor to this group in this supercell.
+        - supercell_index: [1,1,2]
+          groups:
+            - name: group3
+              phase: [0.25,0,0]
+              scale: [2,1,1]
