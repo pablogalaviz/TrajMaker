@@ -7,8 +7,8 @@ Takes an input structure in POSCAR format and creates an XDATCAR trajectory with
 
 git clone repository 
 ```shell
-git clone https://github.com/pablogalaviz/trajmaker.git
-cd trajmaker
+git clone https://github.com/pablogalaviz/TrajMaker.git
+cd TrajMaker
 ```
 
 ### Prerequisites
